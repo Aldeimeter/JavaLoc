@@ -79,10 +79,13 @@ public class LocalizationController{
       Label newLabel = new Label(resources.getString("labelText"));
       anchorPane.getChildren().add(newLabel);
     }
-
     @FXML
     void handleChangeLocaleBtn(ActionEvent event){
       Locale.setDefault(Locale.getDefault() == Locale.US ? new Locale("sk","SK") : Locale.US);
-      app.reloadScene(); 
+        try {
+            app.reloadScene();
+        } catch(IOException e){
+            e.printStackTrace();
+        }
     }
 }

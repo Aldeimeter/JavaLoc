@@ -11,18 +11,23 @@ import java.util.ResourceBundle;
 public class App extends Application{
     private Stage primaryStage;
     @Override
-    public void start(Stage primaryStage) throws IOException {
+    public void start(Stage primaryStage) {
       this.primaryStage = primaryStage;
-      reloadScene();
+      try {
+          reloadScene();
+      } catch(IOException e){
+          e.printStackTrace();
+      }
     }
 
-    public void reloadScene() {
+    public void reloadScene() throws IOException{
         try {
+            //Locale.setDefault(new Locale("ru","RU"));
             ResourceBundle resources = ResourceBundle.getBundle("com.vava.bundles.messages");
             FXMLLoader loader = new FXMLLoader(getClass().getResource("Localization.fxml"), resources);
             Parent root = loader.load();
 
-            Scene scene = new Scene(root, 1000, 800);
+            Scene scene = new Scene(root, 1920, 1080);
             primaryStage.setScene(scene);
 
             LocalizationController controller = loader.getController();
